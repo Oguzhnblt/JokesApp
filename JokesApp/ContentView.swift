@@ -16,11 +16,20 @@ struct ContentView: View {
         NavigationView {
             List(jokesVM.jokes) { element in
                 
-                Text(element.joke)
+                Text(element.value)
+            }
+            .toolbar {
+                Button(action: addJoke) {
+                    Text("Add New Joke")
+                }
             }
             .navigationTitle("Jokes App")
             .navigationBarTitleDisplayMode(.automatic)
         }
+    }
+    
+    func addJoke() {
+        jokesVM.getJokes()
     }
 }
 

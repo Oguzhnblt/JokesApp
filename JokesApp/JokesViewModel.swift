@@ -10,7 +10,7 @@ import Alamofire
 
 class JokesVİewModel : ObservableObject {
     
-    @Published var jokes = [Value]()
+    @Published var jokes: [JokesData] = []
     
     init() {
         getJokes()
@@ -18,12 +18,11 @@ class JokesVİewModel : ObservableObject {
     
     func getJokes () {
         
-        AF.request("https://raw.githubusercontent.com/atilsamancioglu/JokesAppJsonData/main/chuck.json",method: .get).responseDecodable(of: JokesData.self) { response in
+        AF.request("https://api.chucknorris.io/jokes/random",method: .get).responseDecodable(of: JokesData.self) { response in
             
             switch response.result {
                 case .success(let data):
-                    let value = data.value
-                    self.jokes += value
+                    self.jokes.append(data)
                 case .failure(let error):
                     print(error)
             }
