@@ -8,14 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @ObservedObject var jokesVM = JokesVİewModel() // JokesViewModel sınıfından nesne türetme
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        
+        NavigationView {
+            List(jokesVM.jokes) { element in
+                
+                Text(element.joke)
+            }
+            .navigationTitle("Jokes App")
+            .navigationBarTitleDisplayMode(.automatic)
         }
-        .padding()
     }
 }
 
